@@ -81,9 +81,11 @@ Report has been reflected in record viewer so that both patient and doctor can s
 ## For Full working project 
 
 
-contact : 
-[Mail](mailto:sonupradhan208@gmail.com?Subject=ehr-blockchain&Body=Hi,)
-`sonupradhan208@gmail.com`
+Contact Information:
+- **Name:** Passable Maremudze
+- **Email:** [passablemaremudze2001@gmail.com](mailto:passablemaremudze2001@gmail.com)
+- **Phone:** +263786927492
+- **Address:** 686 Medium Density Chipinge, Zimbabwe
 
 🆁🅴🆀🆄🅸🆁🅴🅼🅴🅽🆃🆂
 

@@ -71,7 +71,10 @@ const AboutUs = () => {
               <h2>Contact Us</h2>
               <p>
                 We'd love to hear from you! If you have any questions or
-                feedback, please feel free to contact us on Phone: +123 456 7890 , Email: example@company.com.
+                feedback, please feel free to contact us on Phone: +263786927492, Email: passablemaremudze2001@gmail.com.
+              </p>
+              <p>
+                Address: 686 Medium Density Chipinge, Zimbabwe
               </p>
             </div>
           </div>

@@ -1,117 +1,116 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faInstagram,
-  faFacebookF,
+  faGithub,
   faLinkedinIn,
+  faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope, faPhone, faHospital, faUserPlus, faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <div className="bg-gray-800 text-white p-6 ">
-      <div className="container mx-auto">
-        <div className="flex justify-between items-start mb-6 mt-60">
-          {/* Contact Information */}
-          <div className="w-1/3">
-            <h3 className="font-bold text-xl mb-2">Contact Information</h3>
-            <p>
-              <span className="font-bold">Address:</span> 123 Street, City,
-              Country
-            </p>
-            <p>
-              <span className="font-bold">Phone:</span> +123 456 7890
-            </p>
-            <p>
-              <span className="font-bold">Email:</span> example@company.com
-            </p>
+    <footer className="bg-gray-900 text-white">
+      {/* Main Footer Content */}
+      <div className="container mx-auto px-6 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Developer Info */}
+          <div className="space-y-4">
+            <h3 className="text-2xl font-bold mb-4 text-teal-500">Developer Contact</h3>
+            <div className="space-y-2">
+              <div className="flex items-center space-x-3">
+                <FontAwesomeIcon icon={faEnvelope} className="text-teal-500" />
+                <a href="mailto:passablemaremudze2001@gmail.com" 
+                   className="hover:text-teal-500 transition-colors">
+                  passablemaremudze2001@gmail.com
+                </a>
+              </div>
+              <div className="flex items-center space-x-3">
+                <FontAwesomeIcon icon={faPhone} className="text-teal-500" />
+                <a href="tel:+263786927492" 
+                   className="hover:text-teal-500 transition-colors">
+                  +263786927492
+                </a>
+              </div>
+              <div className="flex items-center space-x-3">
+                <FontAwesomeIcon icon={faHospital} className="text-teal-500" />
+                <span className="hover:text-teal-500 transition-colors">
+                  686 Medium Density Chipinge, Zimbabwe
+                </span>
+              </div>
+            </div>
           </div>
 
-          {/* Useful Links */}
-          <div className="w-1/3">
-            <h3 className="font-bold text-xl mb-2">Useful Links</h3>
+          {/* Quick Links */}
+          <div className="space-y-4">
+            <h3 className="text-2xl font-bold mb-4 text-teal-500">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="hover:underline">
-                  About Us
-                </a>
+                <Link to="/" className="flex items-center space-x-2 hover:text-teal-500 transition-colors">
+                  <FontAwesomeIcon icon={faHospital} className="text-teal-500" />
+                  <span>Home</span>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:underline">
-                  Services
-                </a>
+                <Link to="/AboutPage" className="flex items-center space-x-2 hover:text-teal-500 transition-colors">
+                  <FontAwesomeIcon icon={faHospital} className="text-teal-500" />
+                  <span>About Project</span>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:underline">
-                  FAQs
-                </a>
+                <Link to="/register" className="flex items-center space-x-2 hover:text-teal-500 transition-colors">
+                  <FontAwesomeIcon icon={faUserPlus} className="text-teal-500" />
+                  <span>Register</span>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:underline">
-                  Privacy Policy
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="w-1/3">
-            <h3 className="font-bold text-xl mb-2">Other Links</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="hover:underline">
-                  Security Partners
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Medical Donors
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Sponsors
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Board Members Information
-                </a>
+                <Link to="/login" className="flex items-center space-x-2 hover:text-teal-500 transition-colors">
+                  <FontAwesomeIcon icon={faSignInAlt} className="text-teal-500" />
+                  <span>Login</span>
+                </Link>
               </li>
             </ul>
           </div>
 
-          {/* Social Media Icons */}
-          <div className="w-1/3 flex justify-end items-center">
-            <a
-              href="https://instagram.com/company"
-              className="mr-4"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FontAwesomeIcon icon={faInstagram} size="2x" />
-            </a>
-            <a
-              href="https://facebook.com/company"
-              className="mr-4"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FontAwesomeIcon icon={faFacebookF} size="2x" />
-            </a>
-            <a
-              href="https://linkedin.com/company"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FontAwesomeIcon icon={faLinkedinIn} size="2x" />
-            </a>
+          {/* Developer Social Links */}
+          <div className="space-y-4">
+            <h3 className="text-2xl font-bold mb-4 text-teal-500">Connect</h3>
+            <div className="flex space-x-4">
+              <a href="https://github.com/faraichikochi" 
+                 target="_blank" 
+                 rel="noopener noreferrer"
+                 className="hover:text-teal-500 transition-colors text-2xl">
+                <FontAwesomeIcon icon={faGithub} />
+              </a>
+              <a href="https://linkedin.com/in/faraichikochi" 
+                 target="_blank" 
+                 rel="noopener noreferrer"
+                 className="hover:text-teal-500 transition-colors text-2xl">
+                <FontAwesomeIcon icon={faLinkedinIn} />
+              </a>
+              <a href="https://twitter.com/faraichikochi" 
+                 target="_blank" 
+                 rel="noopener noreferrer"
+                 className="hover:text-teal-500 transition-colors text-2xl">
+                <FontAwesomeIcon icon={faTwitter} />
+              </a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+
+      {/* Copyright Bar */}
+      <div className="bg-black py-4">
+        <div className="container mx-auto px-6 text-center">
+          <p className="text-sm text-gray-400">
+            © {currentYear} Blockchain Health System. Developed by{" "}
+            <span className="text-teal-500">Farai Chikochi</span>. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
   );
 };
 

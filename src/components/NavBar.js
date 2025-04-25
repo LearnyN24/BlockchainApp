@@ -25,7 +25,7 @@ const NavBar = () => {
               className="text-2xl sm:text-3xl lg:text-4xl font-semibold cursor-pointer"
               onClick={() => navigate("/")}
             >
-              Secure Electronic Health Records
+              Blockchain Health System
             </span>
           </div>
 

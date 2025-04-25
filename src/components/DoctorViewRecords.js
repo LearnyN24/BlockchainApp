@@ -3,111 +3,168 @@ import Web3 from "web3";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import NavBar_Logout from "./NavBar_Logout";
 import PatientRegistration from "../build/contracts/PatientRegistration.json";
+import UploadEhr from "../build/contracts/UploadEhr.json";
+import DiagnosticForm from "../build/contracts/DiagnosticForm.json";
 
-const DoctorViewPatient = () => {
-  const { hhNumber } = useParams(); // Retrieve the hhNumber from the URL parameter
-  const navigate = useNavigate();
-
-  const doctorForm = () => {
-    navigate("/doctor/"+hhNumber+"/doctorform");
-  };
-
-  const viewPatientRecords = () => {
-    navigate("/patient/"+hhNumber+"/viewrecords");
-  };
-
-  const [web3, setWeb3] = useState(null);
-  const [contract, setContract] = useState(null);
-  const [patientDetails, setPatientDetails] = useState(null);
+const DoctorViewRecords = () => {
+  const { hhNumber } = useParams();
+  const [ehrRecords, setEhrRecords] = useState([]);
+  const [diagnosticRecords, setDiagnosticRecords] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const init = async () => {
-      if (window.ethereum) {
-        const web3Instance = new Web3(window.ethereum);
-        setWeb3(web3Instance);
+    const loadRecords = async () => {
+      try {
+        const web3 = new Web3(window.ethereum);
+        const networkId = await web3.eth.net.getId();
 
-        const networkId = await web3Instance.eth.net.getId();
-        const deployedNetwork = PatientRegistration.networks[networkId];
-        const contractInstance = new web3Instance.eth.Contract(
-          PatientRegistration.abi,
-          deployedNetwork && deployedNetwork.address,
+        // Load EHR records
+        const ehrContract = new web3.eth.Contract(
+          UploadEhr.abi,
+          UploadEhr.networks[networkId].address
         );
-        setContract(contractInstance);
-        try {
-          const result = await contractInstance.methods.getPatientDetails(hhNumber).call();
-          setPatientDetails(result);
-        } catch (error) {
-          console.error('Error retrieving patient details:', error);
-          setError('Error retrieving patient details');
-        }
-      } else {
-        console.log('Please install MetaMask extension');
-        setError('Please install MetaMask extension');
+
+        // Load Diagnostic records
+        const diagnosticContract = new web3.eth.Contract(
+          DiagnosticForm.abi,
+          DiagnosticForm.networks[networkId].address
+        );
+
+        const [ehrResults, diagnosticResults] = await Promise.all([
+          ehrContract.methods.getRecords().call(),
+          diagnosticContract.methods.getRecords().call()
+        ]);
+
+        setEhrRecords(ehrResults);
+        setDiagnosticRecords(diagnosticResults);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error loading records:", err);
+        setError("Failed to load medical records. Please make sure you are connected to the correct network.");
+        setLoading(false);
       }
     };
 
-    init();
-  }, [hhNumber]);
+    loadRecords();
+  }, []);
 
-  const cancelOperation = () => {
-    navigate(-1);
-  };
+  if (loading) {
+    return (
+      <div>
+        <NavBar_Logout />
+        <div className="bg-gradient-to-b from-black to-gray-800 text-white p-10 min-h-screen">
+          <div className="text-center">Loading medical records...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div>
+        <NavBar_Logout />
+        <div className="bg-gradient-to-b from-black to-gray-800 text-white p-10 min-h-screen">
+          <div className="text-center text-red-500">{error}</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
-    <NavBar_Logout></NavBar_Logout>
-    <div className="bg-b to-gray-500 p-4 sm:p-10 font-mono text-white h-30 flex flex-col justify-center items-center">
-      <h2 className="text-2xl sm:text-4xl font-bold mb-6">Patient's Profile</h2>
-      <br/>
-        {patientDetails && (
-          <center>
-          <p className="text-xl sm:text-3xl mb-20">
-          Name : {" "}
-            <span className="font-bold text-yellow-500">{patientDetails.name}</span>{"\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0"}
-          DOB : {" "}
-            <span className="font-bold text-yellow-500">{patientDetails.dateOfBirth}</span>{"\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0"}
-          Gender : {" "}
-            <span className="font-bold text-yellow-500">{patientDetails.gender}</span>
-          <br />
-          <br />
-          BloodGroup : {" "}
-            <span className="font-bold text-yellow-500">{patientDetails.bloodGroup}</span>{"\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0"}
-          Address : {" "}
-            <span className="font-bold text-yellow-500">{patientDetails.homeAddress}</span>{"\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0"}
-            <br></br><br></br>
-          Email-Id : {" "}
-            <span className="font-bold text-yellow-500">{patientDetails.email}</span>
-        </p>
-        </center>
-      )}
+      <NavBar_Logout />
+      <div className="bg-gradient-to-b from-black to-gray-800 text-white p-10 min-h-screen">
+        <h2 className="text-3xl font-bold mb-6 text-center">Patient Medical Records</h2>
+        
+        {/* EHR Records Section */}
+        <div className="mb-8">
+          <h3 className="text-2xl font-semibold mb-4">EHR Records</h3>
+          {ehrRecords.length === 0 ? (
+            <div className="text-center text-gray-400">
+              No EHR records found.
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="min-w-full bg-gray-900 rounded-lg overflow-hidden">
+                <thead className="bg-gray-700">
+                  <tr>
+                    <th className="px-6 py-3 text-left">Timestamp</th>
+                    <th className="px-6 py-3 text-left">Record Hash</th>
+                    <th className="px-6 py-3 text-left">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-700">
+                  {ehrRecords.map((record, index) => (
+                    <tr key={index} className="hover:bg-gray-800">
+                      <td className="px-6 py-4">{record.timeStamp}</td>
+                      <td className="px-6 py-4 truncate max-w-xs">
+                        {record.medicalRecordHash}
+                      </td>
+                      <td className="px-6 py-4">
+                        <button
+                          onClick={() => window.open(`https://ipfs.io/ipfs/${record.medicalRecordHash}`, '_blank')}
+                          className="bg-teal-500 text-white px-4 py-2 rounded hover:bg-teal-600 transition-colors"
+                        >
+                          View Document
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+
+        {/* Diagnostic Records Section */}
+        <div>
+          <h3 className="text-2xl font-semibold mb-4">Diagnostic Records</h3>
+          {diagnosticRecords.length === 0 ? (
+            <div className="text-center text-gray-400">
+              No diagnostic records found.
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="min-w-full bg-gray-900 rounded-lg overflow-hidden">
+                <thead className="bg-gray-700">
+                  <tr>
+                    <th className="px-6 py-3 text-left">Record ID</th>
+                    <th className="px-6 py-3 text-left">Doctor</th>
+                    <th className="px-6 py-3 text-left">Patient</th>
+                    <th className="px-6 py-3 text-left">Age</th>
+                    <th className="px-6 py-3 text-left">Gender</th>
+                    <th className="px-6 py-3 text-left">Blood Group</th>
+                    <th className="px-6 py-3 text-left">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-700">
+                  {diagnosticRecords.map((record, index) => (
+                    <tr key={index} className="hover:bg-gray-800">
+                      <td className="px-6 py-4">{record.recordId}</td>
+                      <td className="px-6 py-4">{record.doctorName}</td>
+                      <td className="px-6 py-4">{record.patientName}</td>
+                      <td className="px-6 py-4">{record.age.toString()}</td>
+                      <td className="px-6 py-4">{record.gender}</td>
+                      <td className="px-6 py-4">{record.bloodGroup}</td>
+                      <td className="px-6 py-4">
+                        <button
+                          onClick={() => window.open(`https://ipfs.io/ipfs/${record.cid}`, '_blank')}
+                          className="bg-teal-500 text-white px-4 py-2 rounded hover:bg-teal-600 transition-colors"
+                        >
+                          View Report
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
       </div>
-      <div>
-      <center>
-      <button
-            onClick={viewPatientRecords}
-            className="my-2 px-4 sm:px-8 py-4 sm:py-5 w-full sm:w-1/4 rounded-lg bg-teal-500 hover:bg-gray-600 transition-colors duration-300"
-          >
-            View Record
-          </button>
-          {"\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0"}
-          <button
-          onClick={doctorForm}
-          className="my-2 px-4 sm:px-8 py-4 sm:py-5 w-full sm:w-1/4 rounded-lg bg-teal-500 hover:bg-gray-600 transition-colors duration-300"
-          >
-          Prescription Consultancy
-          </button>
-          {"\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0"}
-          <button
-            onClick={cancelOperation}
-            className="my-2 px-4 sm:px-8 py-4 sm:py-5 w-full sm:w-1/4 rounded-lg bg-teal-500 hover:bg-gray-600 transition-colors duration-300"
-          >
-            Close
-          </button>
-        </center>
-      </div>
-      </div>
+    </div>
   );
 };
 
-export default DoctorViewPatient;
+export default DoctorViewRecords;
