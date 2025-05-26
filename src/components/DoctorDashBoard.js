@@ -20,6 +20,10 @@ const DoctorDashBoardPage = () => {
     navigate("/doctor/"+hhNumber+"/viewdoctorprofile");
   };
 
+  const viewRecords = () => {
+    navigate("/doctor/"+hhNumber+"/viewrecords");
+  };
+
   useEffect(() => {
     const init = async () => {
       // Check if Web3 is injected by MetaMask or any other provider
@@ -76,6 +80,12 @@ const DoctorDashBoardPage = () => {
         View Patient List
         </button>
       
+        <button
+          onClick={viewRecords}
+          className="px-6 py-3 bg-teal-500 hover:bg-gray-600 text-white rounded-lg focus:outline-none focus:ring focus:ring-teal-400 transition duration-300"
+        >
+          View Medical Records
+        </button>
       </div>
       </div>
       </div>

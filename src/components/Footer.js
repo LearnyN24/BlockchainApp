@@ -31,13 +31,13 @@ const Footer = () => {
                 <FontAwesomeIcon icon={faPhone} className="text-teal-500" />
                 <a href="tel:+263786927492" 
                    className="hover:text-teal-500 transition-colors">
-                  +263786927492
+                  +263 78 692 7492
                 </a>
               </div>
               <div className="flex items-center space-x-3">
                 <FontAwesomeIcon icon={faHospital} className="text-teal-500" />
                 <span className="hover:text-teal-500 transition-colors">
-                  686 Medium Density Chipinge, Zimbabwe
+                  Chipinge, Zimbabwe
                 </span>
               </div>
             </div>
@@ -78,19 +78,19 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-2xl font-bold mb-4 text-teal-500">Connect</h3>
             <div className="flex space-x-4">
-              <a href="https://github.com/faraichikochi" 
+              <a href="https://github.com/passablemaremudze" 
                  target="_blank" 
                  rel="noopener noreferrer"
                  className="hover:text-teal-500 transition-colors text-2xl">
                 <FontAwesomeIcon icon={faGithub} />
               </a>
-              <a href="https://linkedin.com/in/faraichikochi" 
+              <a href="https://linkedin.com/in/passablemaremudze" 
                  target="_blank" 
                  rel="noopener noreferrer"
                  className="hover:text-teal-500 transition-colors text-2xl">
                 <FontAwesomeIcon icon={faLinkedinIn} />
               </a>
-              <a href="https://twitter.com/faraichikochi" 
+              <a href="https://twitter.com/passablemaremudze" 
                  target="_blank" 
                  rel="noopener noreferrer"
                  className="hover:text-teal-500 transition-colors text-2xl">
@@ -106,7 +106,7 @@ const Footer = () => {
         <div className="container mx-auto px-6 text-center">
           <p className="text-sm text-gray-400">
             © {currentYear} Blockchain Health System. Developed by{" "}
-            <span className="text-teal-500">Farai Chikochi</span>. All rights reserved.
+            <span className="text-teal-500">Passable Maremudze</span>. All rights reserved.
           </p>
         </div>
       </div>

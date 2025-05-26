@@ -5,6 +5,7 @@ import NavBar_Logout from "./NavBar_Logout";
 import PatientRegistration from "../build/contracts/PatientRegistration.json";
 import UploadEhr from "../build/contracts/UploadEhr.json";
 import DiagnosticForm from "../build/contracts/DiagnosticForm.json";
+import { gatewayUrl } from "../config/ipfsConfig";
 
 const DoctorViewRecords = () => {
   const { hhNumber } = useParams();
@@ -75,7 +76,7 @@ const DoctorViewRecords = () => {
     <div>
       <NavBar_Logout />
       <div className="bg-gradient-to-b from-black to-gray-800 text-white p-10 min-h-screen">
-        <h2 className="text-3xl font-bold mb-6 text-center">Patient Medical Records</h2>
+        <h2 className="text-3xl font-bold mb-6">Medical Records</h2>
         
         {/* EHR Records Section */}
         <div className="mb-8">
@@ -103,7 +104,7 @@ const DoctorViewRecords = () => {
                       </td>
                       <td className="px-6 py-4">
                         <button
-                          onClick={() => window.open(`https://ipfs.io/ipfs/${record.medicalRecordHash}`, '_blank')}
+                          onClick={() => window.open(`${gatewayUrl}/${record.medicalRecordHash}`, '_blank')}
                           className="bg-teal-500 text-white px-4 py-2 rounded hover:bg-teal-600 transition-colors"
                         >
                           View Document
@@ -119,10 +120,10 @@ const DoctorViewRecords = () => {
 
         {/* Diagnostic Records Section */}
         <div>
-          <h3 className="text-2xl font-semibold mb-4">Diagnostic Records</h3>
+          <h3 className="text-2xl font-semibold mb-4">Diagnostic Reports</h3>
           {diagnosticRecords.length === 0 ? (
             <div className="text-center text-gray-400">
-              No diagnostic records found.
+              No diagnostic reports found.
             </div>
           ) : (
             <div className="overflow-x-auto">
@@ -149,7 +150,7 @@ const DoctorViewRecords = () => {
                       <td className="px-6 py-4">{record.bloodGroup}</td>
                       <td className="px-6 py-4">
                         <button
-                          onClick={() => window.open(`https://ipfs.io/ipfs/${record.cid}`, '_blank')}
+                          onClick={() => window.open(`${gatewayUrl}/${record.cid}`, '_blank')}
                           className="bg-teal-500 text-white px-4 py-2 rounded hover:bg-teal-600 transition-colors"
                         >
                           View Report

@@ -1,5 +1,5 @@
 .register {
-  background: linear-gradient(to bottom, black, #333);
+  background: linear-gradient(to bottom, #005EB8, #003087);
   color: white;
   margin: 0;
   height: 100vh;
@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #ff5252;
+  color: #00A3E0;
   font-size: 50px;
   font-weight: bold;
 }
@@ -27,17 +27,17 @@
 }
 .select-reg {
   border-radius: 10px;
-  color: black;
-  background-color: #ff5252;
-  box-shadow: 5px 5px 0px #000;
-  border: 2px solid #000;
+  color: white;
+  background-color: #00A3E0;
+  box-shadow: 5px 5px 0px #003087;
+  border: 2px solid #003087;
   border-radius: 10px;
   font-size: large;
 }
 .label-reg {
   font-size: 40px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: #ff5252;
+  color: #00A3E0;
 }
 
 .button-container-reg {
@@ -54,22 +54,22 @@
   text-align: center;
   text-decoration: none;
   color: #fff;
-  background-color: #ff5252;
-  border: 2px solid #000;
+  background-color: #00A3E0;
+  border: 2px solid #003087;
   border-radius: 10px;
-  box-shadow: 5px 5px 0px #000;
+  box-shadow: 5px 5px 0px #003087;
   transition: all 0.3s ease;
   margin: 20px;
 }
 .but-reg:hover {
-  background-color: #fff;
-  color: #ff5252;
-  border: 2px solid #ff5252;
-  box-shadow: 5px 5px 0px #ff5252;
+  background-color: #003087;
+  color: #fff;
+  border: 2px solid #00A3E0;
+  box-shadow: 5px 5px 0px #00A3E0;
 }
 
 .but-reg:active {
-  background-color: #fcf414;
+  background-color: #41B6E6;
   box-shadow: none;
   transform: translateY(4px);
 }

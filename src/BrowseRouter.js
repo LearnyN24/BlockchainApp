@@ -20,6 +20,7 @@ import ViewPatientList from "./components/ViewPatientList";
 import ViewProfile from "./components/ViewProfile";
 import ViewDoctorProfile from "./components/ViewDoctorProfile";
 import ViewDiagnosticProfile from "./components/ViewDiagnosticProfile";
+import DoctorViewRecords from "./components/DoctorViewRecords";
 import AboutUs from "./components/AboutPage"; 
 
 
@@ -115,7 +116,10 @@ const BrowseRouter = () => {
           path="/doctor/:hhNumber/patientlist"
           element={<ViewPatientList />}
         ></Route>
-       
+        <Route
+          path="/doctor/:hhNumber/viewrecords"
+          element={<DoctorViewRecords />}
+        ></Route>
        
       </Routes>
       <Footer></Footer>
