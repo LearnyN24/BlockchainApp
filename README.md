@@ -37,11 +37,11 @@ Report has been reflected in record viewer so that both patient and doctor can s
 
 Contact Information:
 - **Name:** Farai Chikochi
-- **Email:** [fatsochiko@gmail.com](mailto:fatsochiko@gmail.com)
-- **Phone:** +263719552765
+- **Email:** [fatsochikoz@gmail.com](mailto:fatsochikoz@gmail.com)
+- **Phone:** +86 186 2517 2563
 - **Address:** Harare, Zimbabwe
 
-🆁🅴🆀🆄🅸🆁🅴🅼🅴🅽🆃🆂
+🆁🅴🆀🆄🅸🆁🅴🅼🅽🆃🆂
 
 1.Install nodeJs
 

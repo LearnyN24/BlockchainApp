@@ -71,10 +71,10 @@ const AboutUs = () => {
               <h2 className="text-[#00A3E0]">Contact Us</h2>
               <p>
                 We'd love to hear from you! If you have any questions or
-                feedback, please feel free to contact us on Phone: +263 78 692 7492, Email: passablemaremudze2001@gmail.com.
+                feedback, please feel free to contact us on Phone: +86 186 2517 2563 , Email: fatsochikoz@gmail.com.
               </p>
               <p>
-                Chipinge, Zimbabwe
+                Harare, Zimbabwe
               </p>
             </div>
           </div>
